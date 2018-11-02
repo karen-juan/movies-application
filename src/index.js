@@ -7,6 +7,14 @@ sayHello('World');
 /**
  * require style imports
  */
+
+const $ = require ("jquery");
+
+
+const { displayMessage } = require('./loading.js');
+displayMessage();
+
+
 const {getMovies} = require('./api.js');
 
 getMovies().then((movies) => {
