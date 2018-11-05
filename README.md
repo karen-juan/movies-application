@@ -5,14 +5,14 @@ will allow users to add, edit, and delete movies, as well as rate them. We will
 be using [`json-server`](https://github.com/typicode/json-server) to mock a
 database and our backend, so that we can just worry about the front end and AJAX
 requests.
-
+f
 The webpack dev server is configured to watch for changes both in the javascript
 source, as well as the `public` directory. Whenever changes are detected, the
 page will be reloaded. It will also proxy any requests that start with `/api` to
 localhost:3000, which is where json-server is configured run.
 
 `json-server` is configured to have a delay of 1.2 seconds, so you can see what
-your application might actually look like, instead of serving instantaneous
+your application might actually look like, instead of serving instantaneousl
 reponses. You can modify this behavior by changing (or removing) the number
 after the `-d` flag inside of the npm `dev` script.
 
