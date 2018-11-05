@@ -5,6 +5,9 @@ html, body {
 p {
     display: none;
 }
+.movies {
+    text-align: center;
+}
 
 /*.container {*/
     /*position: relative;*/
