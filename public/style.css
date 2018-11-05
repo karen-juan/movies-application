@@ -1,5 +1,9 @@
 html, body {
     height: 100%;
+    background-color: rgb(200, 218, 223);
+}
+p {
+    display: none;
 }
 
 .container {
