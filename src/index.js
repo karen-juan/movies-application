@@ -18,13 +18,13 @@ const {getMovies} = require('./api.js');
 
 $(document).ready(function(){
     console.log("hello");
-    $("#input-form").show();
+    $("#input-field").show();
 
     getMovies()
         .then((movies) => {
-            $("h1").text('Here are all the movies:');
-            //RENDER TABLE HEADER
-            $(".movies").html("<table style='width:50%; margin:auto; text-align:left;' class='movie-cont'>\n" +
+            $("h1").text('Movie list:');
+            //TABLE
+            $(".movies").html("<table class='movie-cont'>\n" +
                 "<tr>\n" +
                 "<th>ID</th>\n" +
                 "<th>Title</th>\n" +
@@ -34,14 +34,16 @@ $(document).ready(function(){
             movies.forEach(({title, rating, id}) => {
                 $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete-this">x</button></td><td><button class="edit-this">edit</button></td></tr>`);
             });
+
+
             //USER MOVIE INPUT--AJAX REQUEST--
             $("#submit").click(function () {
                 $.ajax({
                     type: "POST",
                     url: "/api/movies",
                     data: {
-                        title: $("#name-input").val(),
-                        rating: $("#rating-input").val()
+                        title: $("#movie_name").val(),
+                        rating: $("#movie_rating").val()
                     },
                     success: function (){location.reload()}
                 });
@@ -49,7 +51,7 @@ $(document).ready(function(){
             $(".delete").click(function(){
                 // const movieData = {$(this).parent().parent();}
                 // console.log(movieData);
-                var id = $(this).parent().parent().children().first().attr("data-id");
+                let id = $(this).parent().parent().children().first().attr("data-id");
                 console.log(id);
                 $.ajax({
                     type: "DELETE",
@@ -60,6 +62,6 @@ $(document).ready(function(){
 
         })
 }).catch((error) => {
-  alert('Oh no! Something went wrong.\nCheck the console for details.');
+  alert('OOPS! Something went wrong.\nCheck the console for details.');
   console.log(error);
 });
