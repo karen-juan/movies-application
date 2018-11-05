@@ -1,8 +1,8 @@
 /**
  * es6 modules and imports
  */
-import sayHello from './hello';
-sayHello('World');
+// import sayHello from './hello';
+// sayHello('World');
 
 /**
  * require style imports
@@ -32,7 +32,10 @@ $(document).ready(function(){
                 "<td>Rating</td>" +
                 "</tr>");
         });
-
+            /MOVIES
+            movies.forEach(({title, rating, id}) => {
+                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
+            });
 
             const addMovieHtml = ({ title, rating, id }) => {
                 return `
@@ -40,8 +43,8 @@ $(document).ready(function(){
                     <td>${title}</td>
                     <td>${rating}</td>
                     <td>${id}</td>
-                </tr>
-            };`
+                </tr>`
+            };
 
             //MOVIES
             movies.forEach(({title, rating, id}) => {
@@ -74,6 +77,6 @@ $(document).ready(function(){
 
         });
 }).catch((error) => {
-  alert('OOPS! Something went wrong.\nCheck the console for details.');
-  console.log(error);
+    alert('OOPS! Something went wrong.\nCheck the console for details.');
+    console.log(error);
 });
