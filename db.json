@@ -6,8 +6,13 @@
       "id": 1
     },
     {
-      "title": "",
-      "rating": "",
+      "title": "Star Wars: A New Hope",
+      "rating": "5",
+      "id": 2
+    },
+    {
+      "title": "blah",
+      "rating": "5",
       "id": 3
     }
   ]
