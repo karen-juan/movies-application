@@ -46,7 +46,7 @@ $(document).ready(function(){
                     success: function (){location.reload()}
                 });
             });
-            $(".delete-this").click(function(){
+            $(".delete").click(function(){
                 // const movieData = {$(this).parent().parent();}
                 // console.log(movieData);
                 var id = $(this).parent().parent().children().first().attr("data-id");
