@@ -23,18 +23,30 @@ $(document).ready(function(){
     getMovies()
         .then((movies) => {
             $("h1").text('Movie list:');
-            //TABLE
-            $(".movies").html("<table class='movie-cont card'>" +
+            // TABLE
+            $.ajax('/db.json').done(function() {
+                $(".movies").html("<table class='movie-cont card'>" +
                 "<tr>" +
                 "<td>ID</td>" +
                 "<td>Title</td>" +
                 "<td>Rating</td>" +
                 "</tr>");
+        });
+
+
+            const addMovieHtml = ({ title, rating, id }) => {
+                return `
+                <tr>;
+                    <td>${title}</td>
+                    <td>${rating}</td>
+                    <td>${id}</td>
+                </tr>
+            };`
+
             //MOVIES
             movies.forEach(({title, rating, id}) => {
-                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
+                $(".movie-cont").append(addMovieHtml());
             });
-
 
             //USER MOVIE INPUT--AJAX REQUEST--
             $(".btn").click(function () {
@@ -60,7 +72,7 @@ $(document).ready(function(){
                 });
             })
 
-        })
+        });
 }).catch((error) => {
   alert('OOPS! Something went wrong.\nCheck the console for details.');
   console.log(error);
