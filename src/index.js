@@ -18,7 +18,32 @@ const {getMovies} = require('./api.js');
 
 $(document).ready(function(){
     console.log("hello");
-    // $("#input-field").show();
+    $("#input-field").show();
+
+
+
+    const addMovieHtml = ({ title, rating, id }) => {
+        $.get('/db.json').done(function(data) {
+            data.forEach(function(element) {
+            let output = "";
+            output += '<td>${title}</td>';
+            output +='<td>${rating}</td>';
+            output += '<td>${id}</td>';
+            $('.movies').append(output);
+            });
+        });
+
+        };
+    //     return `
+    //     <tr>;
+    //         <td>${title}</td>
+    //         <td>${rating}</td>
+    //         <td>${id}</td>
+    //     </tr>`
+    // };
+    //
+    
+    
 
     getMovies()
         .then((movies) => {
@@ -33,23 +58,14 @@ $(document).ready(function(){
                 "</tr>");
         });
 
-            const addMovieHtml = ({ title, rating, id }) => {
-                return `
-                <tr>;
-                    <td>${title}</td>
-                    <td>${rating}</td>
-                    <td>${id}</td>
-                </tr>`
-            };
-
             //MOVIES
             movies.forEach(({title, rating, id}) => {
                 $(".movie-cont").append(addMovieHtml());
             });
             //MOVIES
-            movies.forEach(({title, rating, id}) => {
-                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
-            });
+            // movies.forEach(({title, rating, id}) => {
+            //     $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
+            // });
 
             //USER MOVIE INPUT--AJAX REQUEST--
             $(".btn").click(function () {
