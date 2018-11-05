@@ -4,11 +4,22 @@
     <meta charset="UTF-8" />
     <title>My Application</title>
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-
     <div class="container">
         <h1>Hello There!</h1>
+        <!--DIV FOR MOVIES-->
+        <div class="movies"></div>
+        <!--INPUT MOVIES -->
+        <div style="display: none;" id="input-form">
+            <form method="post" enctype="application/x-www-form-urlencoded">
+                <input id="name-input" type="text" placeholder="Enter movie name..."/>
+                <input id="rating-input" type="text" placeholder="Enter movie rating x/5.."/>
+            </form>
+            <button id="submit" type="button">Add a Movie</button>
+        </div>
+    </div>
         <p>To get started, edit <code>src/index.js</code>.</p>
     </div>
 
