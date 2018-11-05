@@ -32,10 +32,6 @@ $(document).ready(function(){
                 "<td>Rating</td>" +
                 "</tr>");
         });
-            /MOVIES
-            movies.forEach(({title, rating, id}) => {
-                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
-            });
 
             const addMovieHtml = ({ title, rating, id }) => {
                 return `
@@ -49,6 +45,10 @@ $(document).ready(function(){
             //MOVIES
             movies.forEach(({title, rating, id}) => {
                 $(".movie-cont").append(addMovieHtml());
+            });
+            //MOVIES
+            movies.forEach(({title, rating, id}) => {
+                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
             });
 
             //USER MOVIE INPUT--AJAX REQUEST--
