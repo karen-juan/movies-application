@@ -16,50 +16,20 @@ displayMessage();
 
 const {getMovies} = require('./api.js');
     getMovies().then((movies) => {
-        // console.log('Here are all the movies:');
+        console.log('Here are all the movies:');
         movies.forEach(({title, rating, id}) => {
-            // console.log(`id#${id} - ${title} - rating: ${rating}`);
+            console.log(`id#${id} - ${title} - rating: ${rating}`);
         })
     });
 $(document).ready(function() {
     console.log("hello");
-    $(".input-field").show();
-
-    // const addMovieHtml = (data) => {
-    //         let output = "";
-    //         data.forEach(function(input) {
-    //         output += '<td>data.title</td>';
-    //         output +='<td>data.rating</td>';
-    //         output += '<td>data.id</td>';
-    //         });
-    //         return output
-    //     };
-    //
-    // $.get('/db.json').done(function () {
-    //     $('.movies').append(output);
-    // });
-
-
-    //     };
-    //     return `
-    //     <tr>;
-    //         <td>${title}</td>
-    //         <td>${rating}</td>
-    //         <td>${id}</td>
-    //     </tr>`
-    // };
-    //
-
-    //MOVIES
-    // movies.forEach(({title, rating, id}) => {
-    //     $(".movie-cont").append(addMovieHtml());
-    // });
+    // $(".input-field").show();
 
     getMovies()
         .then((movies) => {
             $("h1").text('Movie list:');
             // TABLE
-            $(".movies").html("<table class='movie-cont card'>" +
+            $(".movies").html("<table class='movie-cont'>" +
                 "<tr>" +
                 "<th>ID</th>" +
                 "<th>Title</th>" +
@@ -68,6 +38,7 @@ $(document).ready(function() {
             movies.forEach(({title, rating, id}) => {
                 $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td></tr>`);
             });
+
             //USER MOVIE INPUT--AJAX REQUEST--
             $(".btn").click(function () {
                 $.ajax({
