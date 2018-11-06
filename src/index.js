@@ -23,8 +23,9 @@ const {getMovies} = require('./api.js');
     });
 $(document).ready(function() {
     console.log("hello");
-    // $(".input-field").show();
+    $(".input-field").show();
 
+    let allMoviesHtml = () => {
     getMovies()
         .then((movies) => {
             $("h1").text('Movie list:');
@@ -36,9 +37,16 @@ $(document).ready(function() {
                 "<th>Rating</th>" +
                 "</tr>");
             movies.forEach(({title, rating, id}) => {
-                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td></tr>`);
+                $(".movie-cont").append(`<tr>
+                <td>${id}</td> 
+                <td>${title}</td>  
+                <td>${rating}</td> 
+                <td><button data-id="${id}" class="delete">x</button></td> 
+                </tr>`);
             });
-
+        });
+    };
+        return allMoviesHtml();
             //USER MOVIE INPUT--AJAX REQUEST--
             $(".btn").click(function () {
                 $.ajax({
@@ -48,19 +56,22 @@ $(document).ready(function() {
                         title: $("#movie_name").val(),
                         rating: $("#movie_rating").val()
                     },
-                    success: function () {location.reload()}
-                });
-            });
+
+                }).done(function(movie) {
+                    $(".movie-cont").append(`<tr>
+                    <td>${movie.id}</td> 
+                    <td>${movie.title}</td>
+                    <td>${movie.rating}</td>
+                    <td><button data-id="${movie.id}" class="delete">x</button></td>
+                    </tr>`);
+
             $(".delete").click(function () {
-                // const movieData = {$(this).parent().parent();}
-                // console.log(movieData);
-                let id = $(this).parent().parent().children().first().attr("data-id");
+                let id = $(this).data('id');
                 console.log(id);
                 $.ajax({
                     type: "delete",
                     url: "/api/movies/" + id,
-                    success: function () {location.reload()}
-                });
+                }).done();
             });
         });
 }).catch((error) => {
