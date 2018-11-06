@@ -15,25 +15,32 @@ const { displayMessage } = require('./loading.js');
 displayMessage();
 
 const {getMovies} = require('./api.js');
-
-$(document).ready(function(){
+    getMovies().then((movies) => {
+        // console.log('Here are all the movies:');
+        movies.forEach(({title, rating, id}) => {
+            // console.log(`id#${id} - ${title} - rating: ${rating}`);
+        })
+    });
+$(document).ready(function() {
     console.log("hello");
-    $("#input-field").show();
+    $(".input-field").show();
+
+    // const addMovieHtml = (data) => {
+    //         let output = "";
+    //         data.forEach(function(input) {
+    //         output += '<td>data.title</td>';
+    //         output +='<td>data.rating</td>';
+    //         output += '<td>data.id</td>';
+    //         });
+    //         return output
+    //     };
+    //
+    // $.get('/db.json').done(function () {
+    //     $('.movies').append(output);
+    // });
 
 
-
-    const addMovieHtml = ({ title, rating, id }) => {
-        $.get('/db.json').done(function(data) {
-            data.forEach(function(element) {
-            let output = "";
-            output += '<td>${title}</td>';
-            output +='<td>${rating}</td>';
-            output += '<td>${id}</td>';
-            $('.movies').append(output);
-            });
-        });
-
-        };
+    //     };
     //     return `
     //     <tr>;
     //         <td>${title}</td>
@@ -42,31 +49,25 @@ $(document).ready(function(){
     //     </tr>`
     // };
     //
-    
-    
+
+    //MOVIES
+    // movies.forEach(({title, rating, id}) => {
+    //     $(".movie-cont").append(addMovieHtml());
+    // });
 
     getMovies()
         .then((movies) => {
             $("h1").text('Movie list:');
             // TABLE
-            $.ajax('/db.json').done(function() {
-                $(".movies").html("<table class='movie-cont card'>" +
+            $(".movies").html("<table class='movie-cont card'>" +
                 "<tr>" +
-                "<td>ID</td>" +
-                "<td>Title</td>" +
-                "<td>Rating</td>" +
+                "<th>ID</th>" +
+                "<th>Title</th>" +
+                "<th>Rating</th>" +
                 "</tr>");
-        });
-
-            //MOVIES
             movies.forEach(({title, rating, id}) => {
-                $(".movie-cont").append(addMovieHtml());
+                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td></tr>`);
             });
-            //MOVIES
-            // movies.forEach(({title, rating, id}) => {
-            //     $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td><td><button class="edit">edit</button></td></tr>`);
-            // });
-
             //USER MOVIE INPUT--AJAX REQUEST--
             $(".btn").click(function () {
                 $.ajax({
@@ -76,21 +77,20 @@ $(document).ready(function(){
                         title: $("#movie_name").val(),
                         rating: $("#movie_rating").val()
                     },
-                    success: function (){location.reload()}
+                    success: function () {location.reload()}
                 });
             });
-            $(".delete").click(function(){
+            $(".delete").click(function () {
                 // const movieData = {$(this).parent().parent();}
                 // console.log(movieData);
                 let id = $(this).parent().parent().children().first().attr("data-id");
                 console.log(id);
                 $.ajax({
-                    type: "DELETE",
+                    type: "delete",
                     url: "/api/movies/" + id,
                     success: function () {location.reload()}
                 });
-            })
-
+            });
         });
 }).catch((error) => {
     alert('OOPS! Something went wrong.\nCheck the console for details.');
