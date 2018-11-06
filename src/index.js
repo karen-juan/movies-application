@@ -36,7 +36,12 @@ $(document).ready(function() {
                 "<th>Rating</th>" +
                 "</tr>");
             movies.forEach(({title, rating, id}) => {
-                $(".movie-cont").append(`<tr><td data-id="${id}">${id}</td> <td>${title}</td> <td>${rating}</td><td><button class="delete">x</button></td></tr>`);
+                $(".movie-cont").append(`<tr>
+                <td>${id}</td> +
+                <td>${title}</td> + 
+                <td>${rating}</td> +
+                <td><button class="delete">x</button></td> +
+                </tr>`);
             });
 
             //USER MOVIE INPUT--AJAX REQUEST--
@@ -55,7 +60,7 @@ $(document).ready(function() {
                 // const movieData = {$(this).parent().parent();}
                 // console.log(movieData);
                 let id = $(this).parent().parent().children().first().attr("data-id");
-                console.log(id);
+                // console.log(id);
                 $.ajax({
                     type: "delete",
                     url: "/api/movies/" + id,

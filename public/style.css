@@ -1,6 +1,10 @@
 html, body {
     height: 100%;
-    background-color: rgb(200, 218, 223);
+    background-color: white;
+}
+h1 {
+    text-align: center;
+    text-decoration: underline;
 }
 p {
     display: none;
