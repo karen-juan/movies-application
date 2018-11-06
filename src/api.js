@@ -4,3 +4,6 @@ module.exports = {
       .then(response => response.json());
   }
 };
+
+// export const fetch('/api/movies') {
+// }
